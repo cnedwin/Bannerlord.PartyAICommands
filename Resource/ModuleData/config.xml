@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+	<!-- Hold this button and left-click on a hostile party to order your escorts to engage them -->
+	<OrderEscortEngageHoldKey>56</OrderEscortEngageHoldKey> <!-- default: 56 = Left Alt.	https://wiki.nexusmods.com/index.php/DirectX_Scancodes_And_How_To_Use_Them -->
+	
+	<!-- Minimum AI raiding score multiplier at +20 relation with village owner -->
+	<RelationRaidingPositiveMultMin>0.3</RelationRaidingPositiveMultMin>	<!-- Native: 1, default: 0.3, should stay between 0 and 1 -->
+	<!-- Maximum AI raiding score multiplier at -20 relation with village owner -->
+	<RelationRaidingNegativeMultMax>1.5</RelationRaidingNegativeMultMax>	<!-- Native: 1, default: 1.5, setting this much higher may disrupt AI -->
+	<!-- Minimum AI sieging score multiplier at +20 relation with castle/town owner -->
+	<RelationSiegingPositiveMultMin>0.3</RelationSiegingPositiveMultMin>	<!-- Native: 1, default: 0.3, should stay between 0 and 1 -->
+	<!-- Maximum AI sieging score multiplier at -20 relation with castle/town owner -->
+	<RelationSiegingNegativeMultMax>1.5</RelationSiegingNegativeMultMax>	<!-- Native: 1, default: 1.5, setting this much higher may disrupt AI -->
+
+	<!-- AI raiding score multiplier for villages with shared culture -->
+	<SameCultureRaidingMult>0.5</SameCultureRaidingMult>	<!-- Native: 1, default: 0.5, should stay between 0 and 1 -->
+	<!-- AI raiding score multiplier for villages with shared culture -->
+	<SameCultureSiegingMult>1.5</SameCultureSiegingMult>	<!-- Native: 1, default: 1.5, setting this much higher may disrupt AI -->
+
+	<!-- Parties will try to buy food reserves this many days for their current party size -->
+	<MinimumDaysFoodToLastWhileBuyingFood>14</MinimumDaysFoodToLastWhileBuyingFood> <!-- Native: 10, default: 14 -->
+	<!-- Don't set much higher than 14, starvation is often caused by lack of gold or food unavailability in settlements. -->
+	<!-- Setting this too high will cause parties to overspend on food, which they all lose when they are defeated, leading to even less gold reserves afterwards -->
+
+	<!-- If a Clan party of the player has less gold than this amount, they get this amount from your treasury per day. -->
+	<ClanPartyGoldLimitToTakeFromTreasury>500</ClanPartyGoldLimitToTakeFromTreasury> <!-- Native: 0, default: 500 -->
+	<!-- Clan parties use gold to buy food and horses, recruit soldiers and to upgrade troops. If they are broke they will starve. -->
+
+	<!-- Use only in case of crashes, wipes all orders. Does not reset all AI propertly, hence debug only -->
+	<EnableDebugCancelAllOrders>false</EnableDebugCancelAllOrders> <!-- Default: false -->
+
+	<!-- Restricts AI sieges to fortifications along Kingdom borders only -->
+	<EnableBorderOnlySieges>true</EnableBorderOnlySieges> <!-- Native: false, default: true -->
+
+</Config>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+	<Name value = "Party AI Overhaul and Commands"/>
+	<Id value = "PartyAIOverhaulCommands"/>
+	<Version value = "v2.4.7"/>
+	<DefaultModule value="false"/>
+	<SingleplayerModule value="true"/>
+	<MultiplayerModule value="false"/>
+	<Official value="false"/>
+	<DependedModules>
+		<DependedModule Id="Bannerlord.Harmony" />
+		<DependedModule Id="Native"/>
+		<DependedModule Id="SandBoxCore"/>
+		<DependedModule Id="Sandbox"/>
+		<DependedModule Id="CustomBattle"/>
+		<DependedModule Id="StoryMode" />
+	</DependedModules>
+	<SubModules>
+		<SubModule>
+			<Name value = "PartyAIOverhaulCommands"/>
+			<DLLName value = "PartyAIOverhaulCommands.dll"/>
+			<SubModuleClassType value="PartyAIOverhaulCommands.SubModule"/>
+			<Tags>
+				<Tag key="DedicatedServerType" value="none"/>
+				<Tag key="IsNoRenderModeElement" value="false"/>
+			</Tags>
+		</SubModule>
+	</SubModules>
+	<Xmls/>
+</Module>

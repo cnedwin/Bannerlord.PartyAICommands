@@ -1,0 +1,162 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildProjectDirectory)\env.props" />
+  <!-- Main Project Properties -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <PlatformTarget Condition=" '$(PlatformTarget)' == '' ">x64</PlatformTarget>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1C77395D-11EA-0000-0000-000000000000}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PartyAIOverhaulCommands</RootNamespace>
+    <AssemblyName>PartyAIOverhaulCommands</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <!-- Debug Configuration Properties -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>D:\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\PartyAIOverhaulCommands\bin\Win64_Shipping_Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- Release Configuration Properties -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>$(GamePath)Modules\CharacterReload\bin\Win64_Shipping_Client</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- Debugging Properties -->
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(GamePath)bin\Win64_Shipping_Client\Bannerlord.exe</StartProgram>
+    <StartArguments>/singleplayer _MODULES_*Bannerlord.Harmony*Bannerlord.ButterLib*Bannerlord.UIExtenderEx*Bannerlord.MBOptionScreen*Bannerlord.MBOptionScreen.MCMv3*Bannerlord.MBOptionScreen.ModLib*Native*SandBoxCore*Sandbox*CustomBattle*StoryMode*CharacterReload*_MODULES_</StartArguments>
+    <StartWorkingDirectory>$(GamePath)bin\Win64_Shipping_Client</StartWorkingDirectory>
+  </PropertyGroup>
+  <!-- Bannerlord Native Assemblies -->
+  <ItemGroup>
+    <Reference Include="$(GamePath)bin\Win64_Shipping_Client\TaleWorlds*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- Bannerlord Module Assemblies  -->
+    <Reference Include="$(GamePath)Modules\Native\bin\Win64_Shipping_Client\TaleWorlds*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(GamePath)Modules\SandBox\bin\Win64_Shipping_Client\SandBox*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(GamePath)Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(GamePath)Modules\CustomBattle\bin\Win64_Shipping_Client\TaleWorlds*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Lib.Harmony.2.0.4\lib\net472\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Reactive, Version=5.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>packages\System.Reactive.5.0.0\lib\net472\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Forms, Version=3.0.6000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>packages\System.Reactive.Windows.Forms.5.0.0\lib\net472\System.Reactive.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.XmlDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Xml.XmlDocument.4.3.0\lib\net46\System.Xml.XmlDocument.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <!-- Files & Classes -->
+  <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="ConfigLoader.cs" />
+    <Compile Include="PartyAICommandsBehavior.cs" />
+    <Compile Include="PartyOrder.cs" />
+    <Compile Include="Pathes\AddToCountsPatch.cs" />
+    <Compile Include="Pathes\AiArmyMemberBehaviorPatch.cs" />
+    <Compile Include="Pathes\AiMilitaryBehaviorHourlyTickPatch.cs" />
+    <Compile Include="Pathes\ApplyRecruitMercenaryPatch.cs" />
+    <Compile Include="Pathes\CalculateInitiativeScoresForEnemyPatch.cs" />
+    <Compile Include="Pathes\CalculatePatrollingScoreForSettlementPatch.cs" />
+    <Compile Include="Pathes\CanAddFocusToSkillWithFocusAmountPatch.cs" />
+    <Compile Include="Pathes\CharacterAttributeItemVMPatch.cs" />
+    <Compile Include="Pathes\CheckModulesPatch.cs" />
+    <Compile Include="Pathes\conversation_clan_member_manage_troops_on_conditionPatch.cs" />
+    <Compile Include="Pathes\EndCaptivityActionPatch.cs" />
+    <Compile Include="Pathes\FindBestTargetAndItsValueForFactionPatch.cs" />
+    <Compile Include="Pathes\FindNumberOfTroopsToLeaveToGarrisonPatch.cs" />
+    <Compile Include="Pathes\Formation_set_ArrangementOrder_Patch.cs" />
+    <Compile Include="Pathes\GetBestInitiativeBehaviorPatch.cs" />
+    <Compile Include="Pathes\GetMobilePartiesToCallToArmyPatch.cs" />
+    <Compile Include="Pathes\GetRecruitVolunteerFromMapPatch.cs" />
+    <Compile Include="Pathes\GetTargetScoreForFactionPatch.cs" />
+    <Compile Include="Pathes\HeroCanRecruitFromHeroPatch.cs" />
+    <Compile Include="Pathes\IsMainTroopsLimitWarningEnabledPatch.cs" />
+    <Compile Include="Pathes\IsPerkAvailablePatch.cs" />
+    <Compile Include="Pathes\OnEventEndedPatch.cs" />
+    <Compile Include="Pathes\OnTradeProfitMade2Patch.cs" />
+    <Compile Include="Pathes\OnTradeProfitMadePatch.cs" />
+    <Compile Include="Pathes\PartiesBuyFoodCampaignBehaviorPatch.cs" />
+    <Compile Include="Pathes\PartiesBuyHorseCampaignBehaviorOnSettlementEnteredPatch.cs" />
+    <Compile Include="Pathes\PlayerEncounterPatch.cs" />
+    <Compile Include="Pathes\PlayerTrackCompanionBehaviorPatch.cs" />
+    <Compile Include="Pathes\RefreshCanAddFocusPatch.cs" />
+    <Compile Include="Pathes\RemoveCompanionActionPatch.cs" />
+    <Compile Include="Pathes\ScatterCompanionActionPatch.cs" />
+    <Compile Include="Pathes\SetMoveEngagePartyPatch.cs" />
+    <Compile Include="Pathes\SetMoveGoToPointPatch.cs" />
+    <Compile Include="Pathes\SetMoveGoToSettlementPatch.cs" />
+    <Compile Include="Pathes\UpgradeReadyTroopsPatch.cs" />
+    <Compile Include="SubModule.cs" />
+    <Compile Include="Utils\HeroExtension.cs" />
+    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resource\ModuleData\config.xml" />
+    <Content Include="Resource\ModuleData\Languages\CNs\party_ai_commands.xml" />
+    <Content Include="Resource\ModuleData\party_ai_commands.xml" />
+    <Content Include="Resource\SubModule.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GauntletUI\Screen\State\" />
+    <Folder Include="VM\" />
+  </ItemGroup>
+  <!-- Post-Build -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy  /Y /S "$(MSBuildProjectDirectory)\resource" "$(GamePath)Modules\PartyAIOverhaulCommands\"</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
