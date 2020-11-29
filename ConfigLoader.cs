@@ -39,7 +39,7 @@ namespace PartyAIOverhaulCommands
 			try
 			{
 				XmlSerializer serializer = new XmlSerializer(typeof(Config));
-				StreamReader reader = new StreamReader(filePath);
+				using StreamReader reader = new StreamReader(filePath);
 				return (Config)serializer.Deserialize(reader);
 			}
 			catch (Exception e)

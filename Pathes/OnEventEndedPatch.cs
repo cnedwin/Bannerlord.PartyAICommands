@@ -39,10 +39,5 @@ namespace PartyAIOverhaulCommands
 				MessageBox.Show(__exception.FlattenException());
 			}
 		}
-
-		private static bool Prepare()
-		{
-			return true;
-		}
 	}
 }

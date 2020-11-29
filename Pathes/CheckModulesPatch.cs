@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using HarmonyLib;
 using TaleWorlds.Core;
+using TaleWorlds.SaveSystem;
 
 namespace PartyAIOverhaulCommands
 {
@@ -11,8 +12,11 @@ namespace PartyAIOverhaulCommands
 	{
 		public static bool missing_modules;
 
-		private static void Postfix(List<ModuleCheckResult> __result)
+		public static MetaData meta_data;
+
+		private static void Postfix(MetaData fileMetaData, List<ModuleCheckResult> __result)
 		{
+			meta_data = fileMetaData;
 			if (__result.Count > 0)
 			{
 				missing_modules = true;

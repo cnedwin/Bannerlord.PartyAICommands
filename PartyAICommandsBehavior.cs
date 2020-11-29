@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using HarmonyLib;
-using SandBox;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.SandBox.Conversations;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
-using TaleWorlds.MountAndBlade;
 using TaleWorlds.SaveSystem;
-using TaleWorlds.SaveSystem.Load;
 
 namespace PartyAIOverhaulCommands.src.Behaviours
 {
@@ -239,16 +236,16 @@ namespace PartyAIOverhaulCommands.src.Behaviours
 			{
 				order_map = new Dictionary<Hero, PartyOrder>();
 				template_map = new Dictionary<Hero, TroopRoster>();
-				LoadResult loadResult = Traverse.Create(MBGameManager.Current as CampaignGameManager).Field("_loadedGameResult").GetValue<LoadResult>();
 				ApplicationVersion? GetModuleVersion = Traverse.Create(typeof(TaleWorlds.Core.MetaDataExtensions)).Method("GetModuleVersion", new Type[2]
 				{
 					typeof(MetaData),
 					typeof(string)
 				}).GetValue<ApplicationVersion>(new object[2]
 				{
-					loadResult.MetaData,
+					CheckModulesPatch.meta_data,
 					"Party AI Overhaul and Commands"
 				});
+				CheckModulesPatch.meta_data = null;
 				savegame_module_version = GetModuleVersion.GetValueOrDefault();
 				if (savegame_module_version.Major == 1)
 				{

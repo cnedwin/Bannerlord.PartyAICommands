@@ -43,9 +43,7 @@ namespace PartyAIOverhaulCommands
 
 			private Equipment battle_equipment_backup;
 
-			public PartyPresentationDoneButtonDelegate partyPresentationDoneButtonDelegate;
-
-            public void RegisterDialogue(CampaignGameStarter campaignGameStarter)
+			public void RegisterDialogue(CampaignGameStarter campaignGameStarter)
 			{
 				try
 				{
@@ -228,11 +226,7 @@ namespace PartyAIOverhaulCommands
 					campaignGameStarter.AddPlayerLine("give_party_order_roam_nevermind", "give_party_order_roam_additional", "lord_pretalk", "{=GHXpDIEK}Never mind.", null, null, 99);
 					campaignGameStarter.AddDialogLine("affirm_party_order", "affirm_party_order", "close_window", "{=CX6JHsbB}We shall carry out your instructions!", null, conversation_lord_leave_on_consequence);
 					campaignGameStarter.AddPlayerLine("equipment_party_clan", "hero_main_options", "equipment_party_clan_reply", "{=9n1Uij0W}Let me see your goods and equipment.", conversation_is_clan_party_on_condition, conversation_equipment_party_clan_on_consequence, 99);
-					campaignGameStarter.AddDialogLine("equipment_party_clan_reply", "equipment_party_clan_reply", "lord_pretalk", "{=kJC7LLJm}All right.", conversation_equipment_clan_reply_on_condition, delegate
-					{
-						battle_equipment_backup = null;
-						civilian_equipment_backup = null;
-					});
+					campaignGameStarter.AddDialogLine("equipment_party_clan_reply", "equipment_party_clan_reply", "lord_pretalk", "{=kJC7LLJm}All right.", conversation_equipment_clan_reply_on_condition, null);
 					campaignGameStarter.AddDialogLine("equipment_party_clan_reply", "equipment_party_clan_reply", "lord_pretalk", "{=52AcmMM0}All right, I will change my gear after our conversation.", conversation_equipment_clan_reply_change_on_condition, delegate
 					{
 						battle_equipment_backup = null;
@@ -241,11 +235,7 @@ namespace PartyAIOverhaulCommands
 					campaignGameStarter.AddPlayerLine("troops_and_prisoners_party_clan", "hero_main_options", "troops_and_prisoners_party_clan_reply", "{=dob2z0My}Let's exchange troops and prisoners.", conversation_is_clan_party_on_condition, null, 97);
 					campaignGameStarter.AddDialogLine("troops_and_prisoners_party_clan_reply", "troops_and_prisoners_party_clan_reply", "lord_pretalk", "{=ps3U3ots}All right.", conversation_troops_and_prisoners_party_clan_on_condition, null);
 					campaignGameStarter.AddPlayerLine("equipment_caravan_clan", "caravan_talk", "equipment_caravan_clan_reply", "{=TAyfMDef}Let me see your goods and equipment.", conversation_is_clan_party_or_caravan_on_condition, conversation_equipment_party_clan_on_consequence, 101);
-					campaignGameStarter.AddDialogLine("equipment_caravan_clan_reply", "equipment_caravan_clan_reply", "caravan_pretalk", "{=1baIw5Rl}All right.", conversation_equipment_clan_reply_on_condition, delegate
-					{
-						battle_equipment_backup = null;
-						civilian_equipment_backup = null;
-					});
+					campaignGameStarter.AddDialogLine("equipment_caravan_clan_reply", "equipment_caravan_clan_reply", "caravan_pretalk", "{=1baIw5Rl}All right.", conversation_equipment_clan_reply_on_condition, null);
 					campaignGameStarter.AddDialogLine("equipment_caravan_clan_reply_change", "equipment_caravan_clan_reply", "caravan_pretalk", "{=dQwm7RgG}All right, I will change my equipment after our conversation.", conversation_equipment_clan_reply_change_on_condition, delegate
 					{
 						battle_equipment_backup = null;
@@ -431,12 +421,10 @@ namespace PartyAIOverhaulCommands
 					PartyScreenLogic logic = new PartyScreenLogic();
 					traverse.Field("_partyScreenLogic").SetValue(logic);
 					traverse.Field("_currentMode").SetValue(PartyScreenMode.TroopsManage);
-
-                    logic.Initialize(template_party.Party, all_recruits_party, false, new TextObject("{=3AQlcqvU}Template"), 9999, partyPresentationDoneButtonDelegate, new TextObject("{=UoLVHbJh}Party Template Manager"), false);
+					logic.Initialize(template_party.Party, all_recruits_party, isDismissMode: false, new TextObject("{=3AQlcqvU}Template"), 9999, SelectTroopTreesDoneHandler, new TextObject("{=UoLVHbJh}Party Template Manager"));
 					logic.InitializeTrade(PartyScreenLogic.TransferState.Transferable, PartyScreenLogic.TransferState.NotTransferable, PartyScreenLogic.TransferState.NotTransferable);
 					logic.SetTroopTransferableDelegate(PartyScreenManager.TroopTransferableDelegate);
 					logic.SetCancelActivateHandler(CancelHandler);
-					logic.PartyPresentationDoneButtonDelegate = new PartyPresentationDoneButtonDelegate(SelectTroopTreesDoneHandler);
 					logic.SetDoneConditionHandler(PartyPresentationDoneButtonConditionDelegate);
 					PartyState partyState = Game.Current.GameStateManager.CreateState<PartyState>();
 					partyState.InitializeLogic(logic);
@@ -480,7 +468,7 @@ namespace PartyAIOverhaulCommands
 						{
 							if (template_party.MemberRoster.GetTroopCount(element3.Character) == 0)
 							{
-								template_party.MemberRoster.AddToCounts(element3.Character, 1);
+								template_party.MemberRoster.AddToCounts(element3.Character, element3.Number);
 							}
 						}
 					}
@@ -505,10 +493,9 @@ namespace PartyAIOverhaulCommands
 					PartyScreenLogic logic = new PartyScreenLogic();
 					traverse.Field("_partyScreenLogic").SetValue(logic);
 					traverse.Field("_currentMode").SetValue(PartyScreenMode.TroopsManage);
-					logic.Initialize(template_party.Party, template_limits_party, false, new TextObject("{=3AQlcqvU}Template"), 9999, partyPresentationDoneButtonDelegate,new TextObject("{=UoLVHbJh}Party Template Manager"), false);
+					logic.Initialize(template_party.Party, template_limits_party, isDismissMode: false, new TextObject("{=3AQlcqvU}Template"), 9999, SelectTroopTreesDoneHandler, new TextObject("{=UoLVHbJh}Party Template Manager"));
 					logic.InitializeTrade(PartyScreenLogic.TransferState.Transferable, PartyScreenLogic.TransferState.NotTransferable, PartyScreenLogic.TransferState.NotTransferable);
 					logic.SetTroopTransferableDelegate(PartyScreenManager.TroopTransferableDelegate);
-					logic.PartyPresentationDoneButtonDelegate = new PartyPresentationDoneButtonDelegate(SelectTroopTreesDoneHandler);
 					logic.SetDoneConditionHandler(PartyPresentationDoneButtonConditionDelegate);
 					logic.SetCancelActivateHandler(CancelHandler);
 					PartyState partyState = Game.Current.GameStateManager.CreateState<PartyState>();
@@ -532,7 +519,7 @@ namespace PartyAIOverhaulCommands
 				return false;
 			}
 
-			private static bool SelectTroopTreesDoneHandler(TroopRoster leftMemberRoster, TroopRoster leftPrisonRoster, TroopRoster rightMemberRoster, TroopRoster rightPrisonRoster, FlattenedTroopRoster takenPrisonerRoster, FlattenedTroopRoster releasedPrisonerRoster, bool isForced, List<MobileParty> leftParties = null, List<MobileParty> rightParties = null)
+			private static bool SelectTroopTreesDoneHandler(TroopRoster leftMemberRoster, TroopRoster leftPrisonRoster, TroopRoster rightMemberRoster, TroopRoster rightPrisonRoster, FlattenedTroopRoster takenPrisonerRoster, FlattenedTroopRoster releasedPrisonerRoster, bool isForced, List<MobileParty> leftParties = null, List<MobileParty> rigthParties = null)
 			{
 				return true;
 			}
@@ -630,8 +617,16 @@ namespace PartyAIOverhaulCommands
 
 			private void ResetHeroEquipment(InventoryLogic inventoryLogic)
 			{
-				Hero.OneToOneConversationHero.BattleEquipment.FillFrom(battle_equipment_backup);
-				Hero.OneToOneConversationHero.CivilianEquipment.FillFrom(civilian_equipment_backup);
+				if (battle_equipment_backup != null)
+				{
+					Hero.OneToOneConversationHero.BattleEquipment.FillFrom(battle_equipment_backup);
+				}
+				if (civilian_equipment_backup != null)
+				{
+					Hero.OneToOneConversationHero.CivilianEquipment.FillFrom(civilian_equipment_backup);
+				}
+				civilian_equipment_backup = null;
+				battle_equipment_backup = null;
 			}
 
 			private bool conversation_troops_and_prisoners_party_clan_on_condition()

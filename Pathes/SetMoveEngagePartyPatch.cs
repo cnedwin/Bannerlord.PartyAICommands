@@ -17,7 +17,7 @@ namespace PartyAIOverhaulCommands
 	})]
 	public class SetMoveEngagePartyPatch
 	{
-		private static void Postfix(MobileParty __instance, MobileParty party)
+		public static void Postfix(MobileParty __instance, MobileParty party)
 		{
 			if (party?.LeaderHero?.getOrder() != null && party.LeaderHero.getOrder().Behavior == AiBehavior.EscortParty && party.LeaderHero.getOrder().TargetParty == __instance)
 			{
@@ -63,11 +63,6 @@ namespace PartyAIOverhaulCommands
 			{
 				MessageBox.Show(__exception.FlattenException());
 			}
-		}
-
-		private static bool Prepare()
-		{
-			return true;
 		}
 	}
 }
