@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using HarmonyLib;
+using PartyAIOverhaulCommands;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.SandBox.Conversations;
@@ -51,6 +52,43 @@ namespace PartyAIOverhaulCommands.src.Behaviours
 			CampaignEvents.OnNewGameCreatedEvent.AddNonSerializedListener(this, OnNewGameCreated);
 			CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, OnDailyTick);
 			CampaignEvents.ConversationEnded.AddNonSerializedListener(this, OnConversationEnded);
+			CampaignEvents.AfterSettlementEntered.AddNonSerializedListener(this, OnAfterSettlementEntered);
+			CampaignEvents.OnSettlementLeftEvent.AddNonSerializedListener(this, OnSettlementLeft);
+		}
+
+		private void OnSettlementLeft(MobileParty party, Settlement settlement)
+		{
+			if (party != MobileParty.MainParty)
+			{
+				return;
+			}
+			foreach (KeyValuePair<Hero, PartyOrder> pair in Instance.order_map)
+			{
+				Hero leader = pair.Key;
+				PartyOrder order = pair.Value;
+				if (leader != null && order != null && leader.PartyBelongedTo != null && order.Behavior == AiBehavior.EscortParty && order.TargetParty == MobileParty.MainParty && order.TempTargetParty == null)
+				{
+					leader.PartyBelongedTo.SetMoveEscortParty(order.TargetParty);
+				}
+			}
+		}
+
+		private void OnAfterSettlementEntered(MobileParty party, Settlement settlement, Hero hero)
+		{
+			if (party != MobileParty.MainParty)
+			{
+				return;
+			}
+			foreach (KeyValuePair<Hero, PartyOrder> pair in Instance.order_map)
+			{
+				Hero leader = pair.Key;
+				PartyOrder order = pair.Value;
+				if (leader != null && order != null && leader.PartyBelongedTo != null && order.Behavior == AiBehavior.EscortParty && order.TargetParty == MobileParty.MainParty && order.TempTargetParty == null)
+				{
+					leader.PartyBelongedTo.SetMoveGoToSettlement(settlement);
+					Traverse.Create(leader.PartyBelongedTo).Method("OnAiTickInternal").GetValue();
+				}
+			}
 		}
 
 		private void OnConversationEnded(CharacterObject character)
@@ -238,12 +276,12 @@ namespace PartyAIOverhaulCommands.src.Behaviours
 				template_map = new Dictionary<Hero, TroopRoster>();
 				ApplicationVersion? GetModuleVersion = Traverse.Create(typeof(TaleWorlds.Core.MetaDataExtensions)).Method("GetModuleVersion", new Type[2]
 				{
-					typeof(MetaData),
-					typeof(string)
+				typeof(MetaData),
+				typeof(string)
 				}).GetValue<ApplicationVersion>(new object[2]
 				{
-					CheckModulesPatch.meta_data,
-					"Party AI Overhaul and Commands"
+				CheckModulesPatch.meta_data,
+				"Party AI Overhaul and Commands"
 				});
 				CheckModulesPatch.meta_data = null;
 				savegame_module_version = GetModuleVersion.GetValueOrDefault();
@@ -384,4 +422,6 @@ namespace PartyAIOverhaulCommands.src.Behaviours
 			}
 		}
 	}
+
 }
+
