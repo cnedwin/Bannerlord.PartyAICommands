@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>D:\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\PartyAIOverhaulCommands\bin\Win64_Shipping_Client\</OutputPath>
+    <OutputPath>E:\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\PartyAIOverhaulCommands\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -109,20 +109,16 @@
     <Compile Include="Pathes\CalculateInitiativeScoresForEnemyPatch.cs" />
     <Compile Include="Pathes\CalculatePatrollingScoreForSettlementPatch.cs" />
     <Compile Include="Pathes\CanAddFocusToSkillWithFocusAmountPatch.cs" />
-    <Compile Include="Pathes\CharacterAttributeItemVMPatch.cs" />
     <Compile Include="Pathes\CheckModulesPatch.cs" />
     <Compile Include="Pathes\conversation_clan_member_manage_troops_on_conditionPatch.cs" />
     <Compile Include="Pathes\EndCaptivityActionPatch.cs" />
     <Compile Include="Pathes\FindBestTargetAndItsValueForFactionPatch.cs" />
-    <Compile Include="Pathes\FindNumberOfTroopsToLeaveToGarrisonPatch.cs" />
     <Compile Include="Pathes\Formation_set_ArrangementOrder_Patch.cs" />
     <Compile Include="Pathes\GetBestInitiativeBehaviorPatch.cs" />
-    <Compile Include="Pathes\GetMobilePartiesToCallToArmyPatch.cs" />
     <Compile Include="Pathes\GetRecruitVolunteerFromMapPatch.cs" />
     <Compile Include="Pathes\GetTargetScoreForFactionPatch.cs" />
     <Compile Include="Pathes\HeroCanRecruitFromHeroPatch.cs" />
     <Compile Include="Pathes\IsMainTroopsLimitWarningEnabledPatch.cs" />
-    <Compile Include="Pathes\IsPerkAvailablePatch.cs" />
     <Compile Include="Pathes\OnEventEndedPatch.cs" />
     <Compile Include="Pathes\OnTradeProfitMade2Patch.cs" />
     <Compile Include="Pathes\OnTradeProfitMadePatch.cs" />
@@ -130,7 +126,6 @@
     <Compile Include="Pathes\PartiesBuyHorseCampaignBehaviorOnSettlementEnteredPatch.cs" />
     <Compile Include="Pathes\PlayerEncounterPatch.cs" />
     <Compile Include="Pathes\PlayerTrackCompanionBehaviorPatch.cs" />
-    <Compile Include="Pathes\RefreshCanAddFocusPatch.cs" />
     <Compile Include="Pathes\RemoveCompanionActionPatch.cs" />
     <Compile Include="Pathes\ScatterCompanionActionPatch.cs" />
     <Compile Include="Pathes\SetMoveEngagePartyPatch.cs" />
@@ -139,6 +134,7 @@
     <Compile Include="Pathes\UpgradeReadyTroopsPatch.cs" />
     <Compile Include="SubModule.cs" />
     <Compile Include="Utils\HeroExtension.cs" />
+    <Compile Include="Utils\ReflectUtils.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
