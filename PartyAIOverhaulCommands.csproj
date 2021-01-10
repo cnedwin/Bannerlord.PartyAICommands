@@ -13,6 +13,7 @@
     <RootNamespace>PartyAIOverhaulCommands</RootNamespace>
     <AssemblyName>PartyAIOverhaulCommands</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+	<LangVersion>9</LangVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -98,40 +99,43 @@
   </ItemGroup>
   <!-- Files & Classes -->
   <ItemGroup>
-    <Compile Include="Config.cs" />
-    <Compile Include="ConfigLoader.cs" />
-    <Compile Include="PartyAICommandsBehavior.cs" />
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\ConfigLoader.cs" />
+    <Compile Include="Behaviors\PartyAICommandsBehavior.cs" />
     <Compile Include="PartyOrder.cs" />
-    <Compile Include="Pathes\AddToCountsPatch.cs" />
-    <Compile Include="Pathes\AiArmyMemberBehaviorPatch.cs" />
+    <Compile Include="Pathes\1ArmyJoiningPatches.cs" />
+    <Compile Include="Pathes\1MiscPatches.cs" />
+    <Compile Include="Pathes\1PartyEscortPatches.cs" />
+    <Compile Include="Pathes\1RecruitmentPatches.cs" />
+    <Compile Include="Pathes\1RespawnPatches.cs" />
+    <Compile Include="Pathes\1ShortTermAiPatches.cs" />
+    <Compile Include="Pathes\2MiscPatches.cs" />
+    <Compile Include="Pathes\2PartyEscortPatches.cs" />
+    <Compile Include="Pathes\2RecruitmentPatches.cs" />
+    <Compile Include="Pathes\3CharacterScreenPatches.cs" />
+    <Compile Include="Pathes\3MiscPatches.cs" />
+    <Compile Include="Pathes\3PartyEscortPatches.cs" />
+    <Compile Include="Pathes\3RecruitmentPatches.cs" />
+    <Compile Include="Pathes\4MiscPatches.cs" />
+    <Compile Include="Pathes\4PartyEscortPatches.cs" />
+    <Compile Include="Pathes\4RecruitmentPatches.cs" />
+    <Compile Include="Pathes\5MiscPatches.cs" />
+    <Compile Include="Pathes\5PartyEscortPatches.cs" />
+    <Compile Include="Pathes\5RecruitmentPatches.cs" />
+    <Compile Include="Pathes\6MiscPatches.cs" />
+    <Compile Include="Pathes\7MiscPatches.cs" />
     <Compile Include="Pathes\AiMilitaryBehaviorHourlyTickPatch.cs" />
-    <Compile Include="Pathes\ApplyRecruitMercenaryPatch.cs" />
-    <Compile Include="Pathes\CalculateInitiativeScoresForEnemyPatch.cs" />
+    <Compile Include="Pathes\ArmyJoiningPatches.cs" />
     <Compile Include="Pathes\CalculatePatrollingScoreForSettlementPatch.cs" />
-    <Compile Include="Pathes\CanAddFocusToSkillWithFocusAmountPatch.cs" />
-    <Compile Include="Pathes\CheckModulesPatch.cs" />
-    <Compile Include="Pathes\conversation_clan_member_manage_troops_on_conditionPatch.cs" />
-    <Compile Include="Pathes\EndCaptivityActionPatch.cs" />
     <Compile Include="Pathes\FindBestTargetAndItsValueForFactionPatch.cs" />
-    <Compile Include="Pathes\Formation_set_ArrangementOrder_Patch.cs" />
-    <Compile Include="Pathes\GetBestInitiativeBehaviorPatch.cs" />
-    <Compile Include="Pathes\GetRecruitVolunteerFromMapPatch.cs" />
+    <Compile Include="Pathes\FindNumberOfTroopsToLeaveToGarrisonPatch.cs" />
     <Compile Include="Pathes\GetTargetScoreForFactionPatch.cs" />
-    <Compile Include="Pathes\HeroCanRecruitFromHeroPatch.cs" />
-    <Compile Include="Pathes\IsMainTroopsLimitWarningEnabledPatch.cs" />
-    <Compile Include="Pathes\OnEventEndedPatch.cs" />
-    <Compile Include="Pathes\OnTradeProfitMade2Patch.cs" />
-    <Compile Include="Pathes\OnTradeProfitMadePatch.cs" />
+    <Compile Include="Pathes\MiscPatches.cs" />
     <Compile Include="Pathes\PartiesBuyFoodCampaignBehaviorPatch.cs" />
-    <Compile Include="Pathes\PartiesBuyHorseCampaignBehaviorOnSettlementEnteredPatch.cs" />
-    <Compile Include="Pathes\PlayerEncounterPatch.cs" />
-    <Compile Include="Pathes\PlayerTrackCompanionBehaviorPatch.cs" />
-    <Compile Include="Pathes\RemoveCompanionActionPatch.cs" />
-    <Compile Include="Pathes\ScatterCompanionActionPatch.cs" />
-    <Compile Include="Pathes\SetMoveEngagePartyPatch.cs" />
-    <Compile Include="Pathes\SetMoveGoToPointPatch.cs" />
-    <Compile Include="Pathes\SetMoveGoToSettlementPatch.cs" />
-    <Compile Include="Pathes\UpgradeReadyTroopsPatch.cs" />
+    <Compile Include="Pathes\PartyEscortPatches.cs" />
+    <Compile Include="Pathes\RecruitmentPatches.cs" />
+    <Compile Include="Pathes\RespawnPatches.cs" />
+    <Compile Include="Pathes\ShortTermAiPatches.cs" />
     <Compile Include="SubModule.cs" />
     <Compile Include="Utils\HeroExtension.cs" />
     <Compile Include="Utils\ReflectUtils.cs" />

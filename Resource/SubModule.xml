@@ -2,7 +2,7 @@
 <Module>
 	<Name value = "Party AI Overhaul and Commands"/>
 	<Id value = "PartyAIOverhaulCommands"/>
-	<Version value = "v2.4.7"/>
+	<Version value = "v2.4.9"/>
 	<DefaultModule value="false"/>
 	<SingleplayerModule value="true"/>
 	<MultiplayerModule value="false"/>

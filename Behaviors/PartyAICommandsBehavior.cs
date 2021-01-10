@@ -269,7 +269,7 @@ namespace PartyAIOverhaulCommands.src.Behaviours
                 {
                     dataStore.SyncData<Dictionary<Hero, PartyOrder>>("order_map", ref this.order_map);
                     dataStore.SyncData<Dictionary<Hero, TroopRoster>>("template_map", ref this.template_map);
-                    int num = (int)MessageBox.Show("Party AI Overhaul and Commands: It seems you are loading a savegame where you temporarily disabled this mod. This is not recommended and may lead to unexpected issues. It is recommended to revert to a savegame where you hadn't yet disabled this mod. Continue at your own risk.");
+                    int num = (int)MessageBox.Show(string.Format("{0} TEST Party AI Overhaul and Commands: It seems you are loading a savegame where you temporarily disabled this mod. This is not recommended and may lead to unexpected issues. It is recommended to revert to a savegame where you hadn't yet disabled this mod. Continue at your own risk.", (object)this.savegame_module_version));
                 }
                 if (!CheckModulesPatch.missing_modules)
                     return;

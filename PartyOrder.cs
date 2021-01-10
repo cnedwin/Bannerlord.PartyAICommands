@@ -1,11 +1,4 @@
-// Decompiled with JetBrains decompiler
-// Type: PartyAIOverhaulCommands.PartyOrder
-// Assembly: PartyAIOverhaulCommands, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 2887702D-9F3C-4D8A-8C30-C3E565582851
-// Assembly location: F:\Downloads\Party AI Overhaul and Commands-493-2-4-9-1606648409\Modules\PartyAIOverhaulCommands\bin\Win64_Shipping_Client\PartyAIOverhaulCommands.dll
-
 using HarmonyLib;
-using PartyAIOverhaulCommands.Reflection;
 using PartyAIOverhaulCommands.src.Behaviours;
 using System;
 using System.Collections.Generic;
@@ -22,16 +15,16 @@ namespace PartyAIOverhaulCommands
 {
     public class PartyOrder
     {
+        [SaveableField(16)]
+        private float _avoidInitiative = -1f;
+        [SaveableField(17)]
+        private float _attackInitiative = -1f;
         [SaveableField(13)]
         private MobileParty _tempTargetParty;
         [SaveableField(14)]
         private MobileParty _ownerParty;
         [SaveableField(15)]
         private Hero _ownerHero;
-        [SaveableField(16)]
-        private float _avoidInitiative = -1f;
-        [SaveableField(17)]
-        private float _attackInitiative = -1f;
 
         public PartyOrder(Hero owner)
         {
@@ -162,9 +155,9 @@ namespace PartyAIOverhaulCommands
         public class PartyOrderBuilder
         {
             public static readonly PartyOrder.PartyOrderBuilder Instance = new PartyOrder.PartyOrderBuilder();
-            private int line_index;
             private readonly int lines_per_page = 8;
             private int lines_current_page = 1;
+            private int line_index;
             private bool findplayerifbored;
             private PartyOrder order;
             private ConversationManager conversation_manager;
@@ -315,6 +308,7 @@ namespace PartyAIOverhaulCommands
                             campaignGameStarter.AddPlayerLine("template_" + hero.Name.ToString(), "recruit_template_party_order_menu1", "recruit_template_party_order_reply_affirm3", "{=xa1kmmj5}Use the same plan as " + hero.Name.ToString() + ".", (ConversationSentence.OnConditionDelegate)(() => PartyAICommandsBehavior.Instance.template_map.ContainsKey(hero) && hero != Hero.OneToOneConversationHero), (ConversationSentence.OnConsequenceDelegate)(() =>
                             {
                                 PartyOrder.PartyOrderBuilder.template_party = new MobileParty();
+                                PartyOrder.PartyOrderBuilder.template_party.StringId = " ";
                                 PartyOrder.PartyOrderBuilder.template_party.MemberRoster.Add(pair.Value);
                             }), 141);
                     }
@@ -353,6 +347,7 @@ namespace PartyAIOverhaulCommands
                 this.cgs.AddPlayerLine("template_" + hero.Name.ToString(), "recruit_template_party_order_menu1", "recruit_template_party_order_reply_affirm3", "{=xa1kmmj5}Use the same plan as " + hero.Name.ToString() + ".", (ConversationSentence.OnConditionDelegate)(() => PartyAICommandsBehavior.Instance.template_map.ContainsKey(hero) && hero != Hero.OneToOneConversationHero), (ConversationSentence.OnConsequenceDelegate)(() =>
                 {
                     PartyOrder.PartyOrderBuilder.template_party = new MobileParty();
+                    PartyOrder.PartyOrderBuilder.template_party.StringId = "";
                     PartyOrder.PartyOrderBuilder.template_party.MemberRoster.Add(PartyAICommandsBehavior.Instance.template_map[hero]);
                 }), 141);
             }
@@ -365,7 +360,7 @@ namespace PartyAIOverhaulCommands
                 party.PrisonRoster.Reset();
                 party.IsActive = false;
                 party.IsVisible = false;
-                Traverse.Create((object)Campaign.Current).Method("FinalizeParty", new System.Type[1]
+                Traverse.Create((object)Campaign.Current).Method("FinalizeParty", new Type[1]
                 {
           typeof (PartyBase)
                 }, (object[])null).GetValue((object)party.Party);
@@ -381,11 +376,13 @@ namespace PartyAIOverhaulCommands
                     if (PartyOrder.PartyOrderBuilder.template_party == null)
                     {
                         PartyOrder.PartyOrderBuilder.template_party = new MobileParty();
+                        PartyOrder.PartyOrderBuilder.template_party.StringId = " ";
                         PartyOrder.PartyOrderBuilder.template_party.Name = new TextObject("{=6a8ajCJO}Selected Troop Trees");
                     }
                     if (PartyOrder.PartyOrderBuilder.all_recruits_party == null)
                     {
                         PartyOrder.PartyOrderBuilder.all_recruits_party = new MobileParty();
+                        PartyOrder.PartyOrderBuilder.all_recruits_party.StringId = " ";
                         PartyOrder.PartyOrderBuilder.all_recruits_party.Name = new TextObject("{=CpuzeJFb}Available Troop Trees");
                         IEnumerable<CharacterObject> all = CharacterObject.FindAll((Predicate<CharacterObject>)(i => i.IsSoldier || i.IsRegular));
                         HashSet<CharacterObject> characterObjectSet = new HashSet<CharacterObject>(all);
@@ -404,9 +401,6 @@ namespace PartyAIOverhaulCommands
                         }
                         foreach (CharacterObject character in characterObjectSet)
                             PartyOrder.PartyOrderBuilder.all_recruits_party.MemberRoster.AddToCounts(character, 1);
-                        
-                        //ReflectUtils.ReflectPropertyAndSetValue("IsVillager", true, PartyOrder.PartyOrderBuilder.all_recruits_party);
-
                     }
                     Traverse traverse = Traverse.Create((object)PartyScreenManager.Instance);
                     PartyScreenLogic partyScreenLogic = new PartyScreenLogic();
@@ -466,6 +460,7 @@ namespace PartyAIOverhaulCommands
                     {
                         PartyOrder.PartyOrderBuilder.template_limits_party = new MobileParty();
                         PartyOrder.PartyOrderBuilder.template_limits_party.Name = new TextObject("{=5R2m2nND}Add these to set Limits");
+                        PartyOrder.PartyOrderBuilder.template_limits_party.StringId = " ";
                         foreach (TroopRosterElement troopRosterElement in PartyOrder.PartyOrderBuilder.template_party.MemberRoster)
                             PartyOrder.PartyOrderBuilder.template_limits_party.AddElementToMemberRoster(troopRosterElement.Character, 1000);
                     }
@@ -522,9 +517,9 @@ namespace PartyAIOverhaulCommands
 
             private bool conversation_is_clan_party_or_caravan_on_condition() => Hero.OneToOneConversationHero != null && Hero.OneToOneConversationHero.PartyBelongedTo != null && Hero.OneToOneConversationHero.Clan == Hero.MainHero.Clan && Hero.MainHero.PartyBelongedTo != Hero.OneToOneConversationHero.PartyBelongedTo;
 
-            private bool conversation_equipment_clan_reply_on_condition() => !Hero.OneToOneConversationHero.CharacterObject.Equipment.IsCivilian ? this.battle_equipment_backup.IsEquipmentEqualTo(Hero.OneToOneConversationHero.BattleEquipment) : this.civilian_equipment_backup.IsEquipmentEqualTo(Hero.OneToOneConversationHero.CivilianEquipment);
+            private bool conversation_equipment_clan_reply_on_condition() => Hero.OneToOneConversationHero.CharacterObject.Equipment.IsCivilian ? this.civilian_equipment_backup.IsEquipmentEqualTo(Hero.OneToOneConversationHero.CivilianEquipment) : this.battle_equipment_backup.IsEquipmentEqualTo(Hero.OneToOneConversationHero.BattleEquipment);
 
-            private bool conversation_equipment_clan_reply_change_on_condition() => !Hero.OneToOneConversationHero.CharacterObject.Equipment.IsCivilian ? !this.battle_equipment_backup.IsEquipmentEqualTo(Hero.OneToOneConversationHero.BattleEquipment) : !this.civilian_equipment_backup.IsEquipmentEqualTo(Hero.OneToOneConversationHero.CivilianEquipment);
+            private bool conversation_equipment_clan_reply_change_on_condition() => Hero.OneToOneConversationHero.CharacterObject.Equipment.IsCivilian ? !this.civilian_equipment_backup.IsEquipmentEqualTo(Hero.OneToOneConversationHero.CivilianEquipment) : !this.battle_equipment_backup.IsEquipmentEqualTo(Hero.OneToOneConversationHero.BattleEquipment);
 
             private bool conversation_trade_party_clan_on_condition()
             {
@@ -789,7 +784,7 @@ namespace PartyAIOverhaulCommands
                         AIBehavior = Army.AIBehaviorFlags.Gathering
                     };
                     army.Gather();
-                    Traverse traverse = Traverse.Create((object)CampaignEventDispatcher.Instance).Method("OnArmyCreated", new System.Type[1]
+                    Traverse traverse = Traverse.Create((object)CampaignEventDispatcher.Instance).Method("OnArmyCreated", new Type[1]
                     {
             typeof (Army)
                     }, (object[])null);
